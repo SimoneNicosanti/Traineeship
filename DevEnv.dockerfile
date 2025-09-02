@@ -55,6 +55,9 @@ RUN pip install pyomo
 RUN apt update
 RUN apt install rsync -y
 
+RUN pip install amplpy
+RUN python -m amplpy.modules install coin highs scip gcg
+
 
 ## Shell Settings
 ENV SHELL=/usr/bin/bash

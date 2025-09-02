@@ -5,7 +5,9 @@ import networkx as nx
 import numpy as np
 import onnx
 import onnx_tool
-from onnx.mapping import TENSOR_TYPE_MAP
+
+# from onnx.mapping import TENSOR_TYPE_MAP
+
 
 class ModelNodeInfo:
     FLOPS = "flops"
@@ -25,14 +27,13 @@ class ModelEdgeInfo:
 
     pass
 
+
 class ModelGraphInfo:
     NAME = "name"
     TENSOR_SIZE_DICT = "tensor_size_dict"
 
 
-
-
-class OnnxModelProfiler():
+class OnnxModelProfiler:
 
     def __init__(self) -> None:
         super().__init__()
@@ -122,16 +123,13 @@ class OnnxModelProfiler():
         for output in model.graph.output:
             for node in model.graph.node:
                 if output.name in node.output:
-                    model_graph.add_edge(
-                        node.name, "OutputReceiver"
-                    )
+                    model_graph.add_edge(node.name, "OutputReceiver")
 
     def do_profile(self, graph: nx.DiGraph, onnx_model: onnx.ModelProto):
 
         infered_model: onnx.ModelProto = onnx.shape_inference.infer_shapes(
             onnx_model, data_prop=True
         )
-        
 
         tensor_info_dict: dict[str, onnx.TensorProto] = {}
         for tensor_info in infered_model.graph.value_info:
@@ -147,7 +145,7 @@ class OnnxModelProfiler():
             # print(f"\t Profiling {onnx_node.name}")
             if onnx_node.name not in flops_dict:
                 node_flops = 0
-            else :
+            else:
                 node_flops = flops_dict[onnx_node.name]
 
             ## profile weights size
@@ -450,7 +448,7 @@ class OnnxModelProfiler():
         return tensor_total_size / (1024 * 1024)
 
     def __init_size_in_bytes(self, elem_type: onnx.TensorProto.DataType) -> int:
-        map_elem = TENSOR_TYPE_MAP.get(elem_type)
-        if map_elem is not None:
-            return map_elem.np_dtype.itemsize
-        return 0
+        # map_elem = TENSOR_TYPE_MAP.get(elem_type)
+        # if map_elem is not None:
+        #     return map_elem.np_dtype.itemsize
+        return 32

@@ -1,0 +1,17 @@
+networks:
+  dissertation_network:
+    driver: bridge
+    name: dissertation_network
+
+services:
+  optimizer:
+    build:
+      dockerfile: ./docker/optimizer.dockerfile
+    tty: true
+    stdin_open: true
+    networks:
+      - dissertation_network
+    volumes:
+      - ./Analysis/PyOmo:/src
+      - ./Analysis/onnx_model:/onnx_model
+    working_dir: /src

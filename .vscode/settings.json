@@ -1,3 +1,6 @@
 {
-    "python.analysis.autoImportCompletions": true
+  "editor.defaultFormatter": "trunk.io",
+  "editor.formatOnSave": true,
+  "python.analysis.indexing": true,
+  "python.analysis.autoImportCompletions": true
 }
