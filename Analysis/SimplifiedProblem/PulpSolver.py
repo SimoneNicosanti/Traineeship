@@ -305,16 +305,18 @@ def define_time_constraints(
                 min_tensor_size,
             )
 
-            ## Product between adjacency and prev_comp_sum
-            aux_prev_comp_prod_var = pulp.LpVariable(
-                name="aux_prod_" + str((prev_comp_id, curr_comp_id)),
-                lowBound=0,
-            )
-            problem += aux_prev_comp_prod_var <= big_M * adj_var
-            problem += aux_prev_comp_prod_var <= prev_comp_latency
-            problem += aux_prev_comp_prod_var >= prev_comp_latency - big_M * (
-                1 - adj_var
-            )
+            aux_prev_comp_prod_var = prev_comp_latency - 1e10 * (1 - adj_var)
+
+            # ## Product between adjacency and prev_comp_sum
+            # aux_prev_comp_prod_var = pulp.LpVariable(
+            #     name="aux_prod_" + str((prev_comp_id, curr_comp_id)),
+            #     lowBound=0,
+            # )
+            # problem += aux_prev_comp_prod_var <= big_M * adj_var
+            # problem += aux_prev_comp_prod_var <= prev_comp_latency
+            # problem += aux_prev_comp_prod_var >= prev_comp_latency - big_M * (
+            #     1 - adj_var
+            # )
 
             aux_prev_comp_prod_var_list.append(aux_prev_comp_prod_var)
 

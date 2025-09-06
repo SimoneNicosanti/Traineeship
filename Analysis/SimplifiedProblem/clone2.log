@@ -125,3 +125,68 @@ Presolve time = 0.04 sec. (26.21 ticks)
 
 Dual simplex solved model.
 
+
+Log for '/tmp/358e028d114d4a118533e141ab707e0b-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:00:07 2025
+
+
+Log for '/tmp/358e028d114d4a118533e141ab707e0b-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:06:18 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 62094 rows and 27978 columns.
+All rows and columns eliminated.
+Presolve time = 0.05 sec. (25.15 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/f0173827569f4b328215d2d3765d8973-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:06:48 2025
+
+
+Log for '/tmp/f0173827569f4b328215d2d3765d8973-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:06:54 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 42052 rows and 19975 columns.
+All rows and columns eliminated.
+Presolve time = 0.03 sec. (17.28 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/d262d0059dcc42a38154a4b381068398-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:07:17 2025
+
+
+Log for '/tmp/d262d0059dcc42a38154a4b381068398-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:07:22 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 42052 rows and 19975 columns.
+All rows and columns eliminated.
+Presolve time = 0.02 sec. (17.28 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/fd857192a51c486c9136e20658852d13-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:09:03 2025
+
+
+Log for '/tmp/fd857192a51c486c9136e20658852d13-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:09:21 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 44353 rows and 21035 columns.
+All rows and columns eliminated.
+Presolve time = 0.01 sec. (18.18 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/0cafafa1e16e4e7cbbf854337acfa7aa-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:09:59 2025
+
+
+Log for '/tmp/0cafafa1e16e4e7cbbf854337acfa7aa-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 13:19:20 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 65505 rows and 29472 columns.
+All rows and columns eliminated.
+Presolve time = 0.03 sec. (26.43 ticks)
+
+Dual simplex solved model.
+

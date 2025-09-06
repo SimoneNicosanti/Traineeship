@@ -5,8 +5,8 @@ import onnx
 import PulpSolver
 from ModelProfiler import OnnxModelProfiler
 
-MODEL_PATH = "../onnx_model/yolo11x-seg/yolo11x-seg.onnx"
-# MODEL_PATH = "../onnx_model/crossvit_9_240/crossvit_9_240_simplified.onnx"
+# MODEL_PATH = "../onnx_model/yolo11x-seg/yolo11x-seg.onnx"
+MODEL_PATH = "../onnx_model/crossvit_9_240/crossvit_9_240_simplified.onnx"
 
 
 def main():
