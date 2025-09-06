@@ -22,10 +22,12 @@ RUN pip install onnx
 RUN pip install onnx-tool
 
 RUN pip install pyomo
+RUN pip install cplex
 RUN pip install amplpy
 RUN python -m amplpy.modules install coin highs scip gcg
 
 RUN pip install matplotlib
+
 
 
 # Optimizer Port

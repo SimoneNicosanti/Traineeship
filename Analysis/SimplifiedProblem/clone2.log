@@ -1,0 +1,127 @@
+
+Log for '/tmp/c0f89d30955146b9aa86af247dc251b8-pulp.lp' Clone_2 (V22.1.1.0) Fri Sep  5 15:37:29 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 7716 rows and 4393 columns.
+All rows and columns eliminated.
+Presolve time = 0.01 sec. (3.20 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/38b20746b6a14c2aaac7ca2bd33d6b8a-pulp.lp' Clone_2 (V22.1.1.0) Fri Sep  5 15:37:35 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 7716 rows and 4393 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (3.20 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/c0619702a5f74d89b206fb0f1d1622f7-pulp.lp' Clone_2 (V22.1.1.0) Fri Sep  5 15:37:52 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 7719 rows and 4397 columns.
+All rows and columns eliminated.
+Presolve time = 0.01 sec. (3.20 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/277c5247fefa441eb684e07c6f971ac6-pulp.lp' Clone_2 (V22.1.1.0) Fri Sep  5 15:38:19 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 7719 rows and 4397 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (3.20 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/e337c7aedaad40f099da3d62b121b0fe-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:42:40 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 7728 rows and 4398 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (3.31 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/ec052fa312be4d068fc2d9700e9e5cbd-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:43:03 2025
+
+
+Log for '/tmp/ec052fa312be4d068fc2d9700e9e5cbd-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:43:09 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 23246 rows and 11020 columns.
+Aggregator did 5 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.02 sec. (9.86 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/9e32b7786d4b4eefa0ef96203a0e38ac-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:43:41 2025
+
+
+Log for '/tmp/9e32b7786d4b4eefa0ef96203a0e38ac-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:50:48 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 47634 rows and 20600 columns.
+Aggregator did 8 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.02 sec. (19.72 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/3934b21d246d4862945e33fdec45b5bb-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:51:18 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 14001 rows and 7980 columns.
+All rows and columns eliminated.
+Presolve time = 0.01 sec. (6.06 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/a9c816033e1240e8a9d2e543114dc712-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:51:35 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 26032 rows and 13310 columns.
+Aggregator did 4 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.01 sec. (11.36 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/da5a1763d2594192950f6fcd5109679c-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:52:10 2025
+
+
+Log for '/tmp/da5a1763d2594192950f6fcd5109679c-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:52:18 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 42077 rows and 19980 columns.
+Aggregator did 5 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.02 sec. (18.01 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/f7d61aa486ee41b2acd44dd6bcfaa045-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:52:55 2025
+
+
+Log for '/tmp/f7d61aa486ee41b2acd44dd6bcfaa045-pulp.lp' Clone_2 (V22.1.1.0) Sat Sep  6 12:56:20 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 62133 rows and 27987 columns.
+Aggregator did 6 substitutions.
+All rows and columns eliminated.
+Presolve time = 0.04 sec. (26.21 ticks)
+
+Dual simplex solved model.
+

@@ -12,6 +12,5 @@ services:
     networks:
       - dissertation_network
     volumes:
-      - ./Analysis/PyOmo:/src
-      - ./Analysis/onnx_model:/onnx_model
+      - ./Analysis:/src
     working_dir: /src
