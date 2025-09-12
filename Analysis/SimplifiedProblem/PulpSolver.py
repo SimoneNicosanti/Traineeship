@@ -22,11 +22,11 @@ def define_vars(
             )
 
     problem.tensor_ass_vars = {}
-    for tensor_id in model_graph.graph["tensor_size_dict"]:
+    for tensor_id in model_graph.edges:
         for comp_edge in comp_graph.edges:
             tensor_ass_key = (tensor_id, comp_edge)
             problem.tensor_ass_vars[tensor_ass_key] = pulp.LpVariable(
-                name="tens_ass_" + str(tensor_ass_key), cat="Binary"
+                name="tens_ass_" + str(hash(tensor_ass_key)), cat="Binary"
             )
 
     problem.adj_vars = {}
@@ -62,43 +62,41 @@ def define_layer_to_comp_assignment_constraints(
         problem += layer_ass_sum == 1
 
     ## Flow of tensors constraints
-    for tensor_id in model_graph.graph["tensor_size_dict"]:
-        for comp_edge in comp_graph.edges:
+    for tensor_id in model_graph.edges:
 
-            if comp_edge[0] == comp_edge[1]:
-                continue
+        for src_comp in comp_graph.nodes:
+            src_node_ass_var = problem.layer_ass_vars[(tensor_id[0], src_comp)]
+            flow_sum = 0
 
-            tensor_ass_var = problem.tensor_ass_vars[(tensor_id, comp_edge)]
+            for dest_comp in comp_graph.nodes:
+                tensor_ass_var = problem.tensor_ass_vars[
+                    (tensor_id, (src_comp, dest_comp))
+                ]
+                flow_sum += tensor_ass_var
 
-            tensor_source_node_id = model_graph.graph["tensor_size_dict"][tensor_id][0]
-            tensor_source_node_ass_var = problem.layer_ass_vars[
-                (tensor_source_node_id, comp_edge[0])
-            ]
-            tensor_dest_layers = set()
-            for model_edge in model_graph.edges:
-                if tensor_id in model_graph.edges[model_edge]["tensor_name_list"]:
-                    tensor_dest_layers.add(model_edge[1])
+            problem += src_node_ass_var == flow_sum
 
-            dest_nodes_ass_sum = 0
-            for dest_layer_id in tensor_dest_layers:
-                dest_node_ass_key = (dest_layer_id, comp_edge[1])
-                dest_nodes_ass_sum += problem.layer_ass_vars[dest_node_ass_key]
+    for tensor_id in model_graph.edges:
 
-            problem += tensor_ass_var <= tensor_source_node_ass_var
-            problem += tensor_ass_var <= dest_nodes_ass_sum
-            problem += (
-                tensor_ass_var
-                >= tensor_source_node_ass_var
-                + (1 / len(tensor_dest_layers)) * dest_nodes_ass_sum
-                - 1
-            )
+        for dst_comp in comp_graph.nodes:
+            dst_node_ass_var = problem.layer_ass_vars[(tensor_id[1], dst_comp)]
+            flow_sum = 0
+
+            for src_comp in comp_graph.nodes:
+
+                tensor_ass_var = problem.tensor_ass_vars[
+                    (tensor_id, (src_comp, dst_comp))
+                ]
+                flow_sum += tensor_ass_var
+
+            problem += dst_node_ass_var == flow_sum
 
     ## Adjacency constraints
     ## Two components are adj if there is a tensor send between them
     for comp_edge in comp_graph.edges:
         adj_sum = 0
         tot_tensors = 0
-        for tensor_id in model_graph.graph["tensor_size_dict"]:
+        for tensor_id in model_graph.edges:
             adj_sum += problem.tensor_ass_vars[(tensor_id, comp_edge)]
             tot_tensors += 1
 
@@ -117,12 +115,12 @@ def define_layer_to_comp_assignment_constraints(
 
     ## Input and Output Components have only one assigned layer
     for layer_id in model_graph.nodes:
-        if layer_id == "InputGenerator":
+        if layer_id == 0:
             problem += problem.layer_ass_vars[(layer_id, 0)] == 1
         else:
             problem += problem.layer_ass_vars[(layer_id, 0)] == 0
 
-        if layer_id == "OutputReceiver":
+        if layer_id == len(model_graph.nodes) - 1:
             problem += (
                 problem.layer_ass_vars[(layer_id, len(comp_graph.nodes) - 1)] == 1
             )
@@ -267,16 +265,15 @@ def define_time_constraints(
             min_layer_flops = layer_flops
         big_M += layer_flops
     big_M = (big_M - min_layer_flops) / (max_layer_flops - min_layer_flops)
-    print(big_M)
 
     max_tensor_size = 0
     min_tensor_size = 1e20
-    for tensor_id in model_graph.graph["tensor_size_dict"]:
-        tensor_size = model_graph.graph["tensor_size_dict"][tensor_id][1]
-        if max_tensor_size < tensor_size:
-            max_tensor_size = tensor_size
-        if min_tensor_size > tensor_size:
-            min_tensor_size = tensor_size
+    # for tensor_id in model_graph.graph["tensor_size_dict"]:
+    #     tensor_size = model_graph.graph["tensor_size_dict"][tensor_id][1]
+    #     if max_tensor_size < tensor_size:
+    #         max_tensor_size = tensor_size
+    #     if min_tensor_size > tensor_size:
+    #         min_tensor_size = tensor_size
 
     topo_sort = list(comp_graph.nodes)
     topo_sort.sort()

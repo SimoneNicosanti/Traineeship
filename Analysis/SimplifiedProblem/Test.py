@@ -4,9 +4,10 @@ import networkx as nx
 import onnx
 import PulpSolver
 from ModelProfiler import OnnxModelProfiler
+from Reduction import reduce_graph_dummy, reduce_with_matching
 
 # MODEL_PATH = "../onnx_model/yolo11x-seg/yolo11x-seg.onnx"
-MODEL_PATH = "../onnx_model/crossvit_9_240/crossvit_9_240_simplified.onnx"
+MODEL_PATH = "../onnx_model/conformer_tiny_patch16/conformer_untrained_simplified.onnx"
 
 
 def main():
@@ -14,15 +15,15 @@ def main():
     onnx_model = onnx.load_model(MODEL_PATH)
     model_graph = OnnxModelProfiler().profile_model(onnx_model, "yolo11x-seg", {})
 
-    data = nx.node_link_data(model_graph)  # Converts graph to node-link format
+    if not nx.is_directed_acyclic_graph(model_graph):
+        raise Exception("Original Graph is not acyclic")
 
-    # Write to JSON file
-    with open("graph.json", "w") as f:
-        json.dump(data, f, indent=2)
+    reduced_graph = reduce_with_matching(model_graph, 5)
+    print("Done Reducing")
 
     network_graph = nx.DiGraph()
 
-    network_graph.add_node(0, tot_comps=6)
+    network_graph.add_node(0, tot_comps=10)
     # network_graph.add_node(1, tot_comps=1)
     # network_graph.add_node(2, tot_comps=1)
 
@@ -53,7 +54,7 @@ def main():
                     model_graph.nodes[mod_node]["flops"] / 1e14
                 )
 
-    PulpSolver.solve_problem(model_graph, network_graph, server_profiles)
+    PulpSolver.solve_problem(reduced_graph, network_graph, server_profiles)
 
     pass
 
