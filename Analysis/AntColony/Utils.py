@@ -66,19 +66,12 @@ class ComponentGraphBuilder:
         end = time.perf_counter_ns()
         # print("Build Component Graph Time >> ", (end - start) * 1e-9)
 
-        start = time.perf_counter_ns()
         if nx.is_directed_acyclic_graph(component_graph):
-            end = time.perf_counter_ns()
             # print("Check Component Graph Time >> ", (end - start) * 1e-9)
             return component_graph
         else:
             cycle = nx.find_cycle(component_graph, orientation="original")
             print(cycle)
-            # for edge in cycle:
-            #     first, second, dir = edge
-            #     print(f"First Comp {first} Nodes >> ", component_graph.nodes[first]["nodes"])
-            #     print(f"Second Comp {second} Nodes >> ", component_graph.nodes[second]["nodes"])
-            #     print("")
             raise Exception("Component Graph is not DAG")
 
     def find_nodes_components(
@@ -123,21 +116,6 @@ class ComponentGraphBuilder:
                 for poss_comp_id in node_possible_set:
                     if poss_comp_id in component_dependency_dict[prev_node_comp]:
                         exclude_set.add(poss_comp_id)
-                        # if poss_comp_id in node_dependency_dict[prev_node_id]:
-                        #     exclude_set.add(poss_comp_id)
-
-            # for prev_node_id in self.previous_map[node_id]:
-            #     prev_node_comp = nodes_components[prev_node_id]
-            #     for poss_comp_id in node_possible_set:
-            #         if poss_comp_id in component_dependency_dict[prev_node_comp]:
-            #             exclude_set.add(poss_comp_id)
-            #         if poss_comp_id in node_dependency_dict[prev_node_id]:
-            #             exclude_set.add(poss_comp_id)
-            # prev_comp_id = nodes_components[prev_node_id]
-            # exclude_set.update(component_dependency_dict[prev_comp_id])
-            # if prev_comp_id not in exclude_set:
-            #     node_dependency_set.add(prev_comp_id)
-            #     component_dependency_dict[prev_comp_id].add(nodes_components[node_id])
 
             difference_set = node_possible_set - exclude_set
 
@@ -167,23 +145,6 @@ class ComponentGraphBuilder:
                         ## Same server --> Setting possible component
                         node_possible_dict[next_node_id].add(node_comp)
 
-                # parallel_nodes = (
-                #     set(model_graph.nodes)
-                #     - self.descendants_map[node_id]
-                #     - self.ancestors_map[node_id]
-                #     - {node_id}
-                # )
-
-                # ## Parallel nodes having the same server can be in the same component
-                # for paral_node_id in parallel_nodes:
-                #     par_server_id = layers_assignments[paral_node_id]
-
-                #     if (
-                #         par_server_id == server_id
-                #     ):
-                #         ## Same server --> Setting possible component
-                #         node_possible_dict[paral_node_id].add(node_comp)
-
             ## Expanding component dependency
             component_dependency_dict.setdefault(node_comp, set())
 
@@ -193,18 +154,10 @@ class ComponentGraphBuilder:
                 node_comp
             ].union(node_dependency_dict[node_id] - set([node_comp]))
 
-            ## All other components having the current component as dependecy
-            ## Will have their dependencies updated with the added node dependencies
-            # for other_comp in component_dependency_dict.keys() :
-            #     if node_comp in component_dependency_dict[other_comp]:
-            #         component_dependency_dict[other_comp] = component_dependency_dict[other_comp].union(node_dependency_dict[node_id] - set([node_comp]))
-
             ## All descendants node will depend by both this component
             ## and all its dependencies
             for descendant_id in self.descendants_map[node_id]:
                 node_dependency_dict[descendant_id].add(node_comp)
-                # node_dependency_dict[descendant_id] = node_dependency_dict[descendant_id].union(component_dependency_dict[node_comp])
-        # print("Components found >> ", next_comp_dict)
 
         return nodes_components
 

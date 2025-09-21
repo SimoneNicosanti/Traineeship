@@ -1,8 +1,4 @@
-import json
-
-import matplotlib.pyplot as plt
 import networkx as nx
-from networkx.readwrite import json_graph
 
 # from Parallel_Reduction import draw_sorted_dag, reduce_parallel_branches
 
@@ -72,6 +68,7 @@ def find_valid_matching(curr_graph: nx.DiGraph) -> nx.DiGraph:
         mark[v] = False
         if curr_graph.in_degree(v) == 0 or curr_graph.out_degree(v) == 0:
             mark[v] = True
+            print(v)
 
     for start_node in vertex_order:
         if mark[start_node]:
@@ -109,9 +106,6 @@ def find_valid_matching(curr_graph: nx.DiGraph) -> nx.DiGraph:
                     if topo_levels[start_node] == topo_levels[w] - 1:
                         mark[w] = True  ## Check if True of False
 
-            mark[check_node] = True
-            mark[start_node] = True
-
     ## Check Matching
     for first_edge in matching:
         for second_edge in matching:
@@ -119,6 +113,7 @@ def find_valid_matching(curr_graph: nx.DiGraph) -> nx.DiGraph:
                 continue
 
             if not set(list(first_edge)).isdisjoint(set(list(second_edge))):
+                print(first_edge, second_edge)
                 raise Exception("Matching not valid")
 
     return matching
@@ -174,68 +169,3 @@ def reduce_with_matching(model_graph: nx.DiGraph, reduction_rounds: int = 3):
 
     return curr_graph
     pass
-
-
-def main():
-
-    with open("yolo11x-seg.json") as f:
-        data = json.load(f)["graph"]
-
-    model_graph: nx.DiGraph = json_graph.node_link_graph(
-        data, directed=True
-    )  # ensure DiGraph
-
-    curr_graph = model_graph
-
-    for i in range(0, 10):
-        valid_match = find_valid_matching(curr_graph)
-
-        merged_graph = nx.DiGraph()
-        for node in curr_graph.nodes:
-            in_match = False
-            for edge in valid_match:
-                if node in edge:
-                    in_match = True
-                    break
-            if not in_match:
-                merged_graph.add_node(node, is_match=False, layers=[node])
-
-        for edge_idx, edge in enumerate(list(valid_match)):
-            match_name = f"match_{edge_idx}_{i}"
-            merged_graph.add_node(match_name, is_match=True, layers=edge)
-
-        ## Connecting again original nodes
-        for first_node in merged_graph.nodes:
-            for second_node in merged_graph.nodes:
-                if first_node == second_node:
-                    continue
-
-                for first_node_lay in merged_graph.nodes[first_node]["layers"]:
-                    for second_node_lay in merged_graph.nodes[second_node]["layers"]:
-                        if (first_node_lay, second_node_lay) in curr_graph.edges:
-                            merged_graph.add_edge(first_node, second_node)
-
-        node_colors = [
-            "red" if merged_graph.nodes[n].get("is_match", True) else "lightblue"
-            for n in merged_graph.nodes
-        ]
-        pos = nx.nx_pydot.graphviz_layout(merged_graph, prog="dot")
-        nx.draw(merged_graph, pos, node_color=node_colors, node_size=100)
-        plt.show()
-
-        print("Nodes >> ", len(merged_graph.nodes))
-        print("Edges >> ", len(merged_graph.edges))
-
-        if not nx.is_directed_acyclic_graph(merged_graph):
-            raise Exception("Not acyclic")
-
-        curr_graph = merged_graph
-
-    return curr_graph
-
-    pass
-
-
-if __name__ == "__main__":
-
-    main()

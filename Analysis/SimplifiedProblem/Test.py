@@ -6,8 +6,8 @@ import PulpSolver
 from ModelProfiler import OnnxModelProfiler
 from Reduction import reduce_graph_dummy, reduce_with_matching
 
-MODEL_PATH = "../onnx_model/yolo11x-seg/yolo11x-seg.onnx"
-# MODEL_PATH = "../onnx_model/conformer_tiny_patch16/conformer_untrained.onnx"
+# MODEL_PATH = "../onnx_model/yolo11x-seg/yolo11x-seg.onnx"
+MODEL_PATH = "../onnx_model/conformer_tiny_patch16/conformer_untrained.onnx"
 
 
 def main():
@@ -18,11 +18,7 @@ def main():
     if not nx.is_directed_acyclic_graph(model_graph):
         raise Exception("Original Graph is not acyclic")
 
-    for node in model_graph.nodes:
-        if model_graph.out_degree(node) == 0 or model_graph.in_degree(node) == 0:
-            print(node)
-
-    reduced_graph = reduce_with_matching(model_graph, 3)
+    reduced_graph = reduce_with_matching(model_graph, 2)
     print("Done Reducing")
 
     network_graph = nx.DiGraph()
