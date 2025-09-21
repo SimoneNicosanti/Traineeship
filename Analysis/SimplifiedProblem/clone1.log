@@ -178,3 +178,128 @@ Total time on 10 threads = 0.03 sec. (204.00 ticks)
 
 Dual simplex solved model.
 
+
+Log for '/tmp/696dacb156c54021a9d4d1b77992d191-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:40:04 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 1337 rows and 5200 columns.
+All rows and columns eliminated.
+Presolve time = 0.01 sec. (2.27 ticks)
+
+Log for '/tmp/696dacb156c54021a9d4d1b77992d191-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:40:04 2025
+
+Using steepest-edge.
+Parallel mode: deterministic, using up to 10 threads for concurrent optimization:
+ * Starting dual Simplex on 1 thread...
+ * Starting primal Simplex on 1 thread...
+
+Total time on 10 threads = 0.02 sec. (195.00 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/5ac66a6952964cd29d82f9d7cf2e6e3c-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:41:21 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 1446 rows and 5730 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (2.49 ticks)
+Parallel mode: deterministic, using up to 10 threads for concurrent optimization:
+ * Starting dual Simplex on 1 thread...
+ * Starting primal Simplex on 1 thread...
+
+Log for '/tmp/5ac66a6952964cd29d82f9d7cf2e6e3c-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:41:21 2025
+
+Using steepest-edge.
+
+Total time on 10 threads = 0.01 sec. (195.42 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/f4593adceeea42b78146a74d51c730f7-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:43:34 2025
+
+
+Log for '/tmp/f4593adceeea42b78146a74d51c730f7-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:44:29 2025
+
+Tried aggregator 1 time.
+Presolve time = 0.01 sec. (2.29 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/1766bc77cc134570a21ba317e4474b3e-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:46:46 2025
+
+
+Log for '/tmp/1766bc77cc134570a21ba317e4474b3e-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:53:19 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 3553 rows and 15920 columns.
+All rows and columns eliminated.
+Presolve time = 0.01 sec. (6.90 ticks)
+Parallel mode: deterministic, using up to 10 threads for concurrent optimization:
+ * Starting dual Simplex on 1 thread...
+ * Starting primal Simplex on 1 thread...
+
+Log for '/tmp/1766bc77cc134570a21ba317e4474b3e-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:53:19 2025
+
+Using steepest-edge.
+
+Total time on 10 threads = 0.02 sec. (203.60 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/44387cddc6c943a781ed343fd0665655-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:53:34 2025
+
+
+Log for '/tmp/44387cddc6c943a781ed343fd0665655-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 12 11:58:31 2025
+
+Presolve time = 0.00 sec. (2.19 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/8d68ddae7b8f4ee1a9aafdb29ae10a14-pulp.lp' Clone_1 (V22.1.1.0) Thu Sep 18 16:10:42 2025
+
+
+Log for '/tmp/8d68ddae7b8f4ee1a9aafdb29ae10a14-pulp.lp' Clone_1 (V22.1.1.0) Thu Sep 18 16:11:27 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 6197 rows and 28700 columns.
+All rows and columns eliminated.
+Presolve time = 0.03 sec. (12.42 ticks)
+Parallel mode: deterministic, using up to 10 threads for concurrent optimization:
+ * Starting dual Simplex on 1 thread...
+ * Starting primal Simplex on 1 thread...
+
+Log for '/tmp/8d68ddae7b8f4ee1a9aafdb29ae10a14-pulp.lp' Clone_1 (V22.1.1.0) Thu Sep 18 16:11:27 2025
+
+Using steepest-edge.
+
+Total time on 10 threads = 0.08 sec. (213.83 ticks)
+
+Dual simplex solved model.
+
+
+Log for '/tmp/f910e470f3ad492f9a02541b3637354a-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 19 13:18:45 2025
+
+
+Log for '/tmp/f910e470f3ad492f9a02541b3637354a-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 19 13:25:01 2025
+
+Tried aggregator 1 time.
+LP Presolve eliminated 3559 rows and 15940 columns.
+All rows and columns eliminated.
+Presolve time = 0.02 sec. (6.91 ticks)
+Parallel mode: deterministic, using up to 10 threads for concurrent optimization:
+ * Starting dual Simplex on 1 thread...
+ * Starting primal Simplex on 1 thread...
+
+Log for '/tmp/f910e470f3ad492f9a02541b3637354a-pulp.lp' Clone_1 (V22.1.1.0) Fri Sep 19 13:25:01 2025
+
+Using steepest-edge.
+
+Total time on 10 threads = 0.04 sec. (203.63 ticks)
+
+Dual simplex solved model.
+

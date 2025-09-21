@@ -1,6 +1,7 @@
 import onnx
 import torch
 from conformer_implementation import Conformer  # adjust import to match the repo
+from onnx import helper
 from onnxsim import simplify
 
 
@@ -43,6 +44,47 @@ def analyze_model(model_path: str):
         print("\t Output Shape >> ", extract_shape(output))
 
 
+def duplicate_shared_initializers(model_path, output_path):
+    model = onnx.load(model_path)
+    graph = model.graph
+
+    # Count how many times each initializer is used
+    usage_count = {}
+    for node in graph.node:
+        for inp in node.input:
+            usage_count[inp] = usage_count.get(inp, 0) + 1
+
+    # Map name -> initializer
+    initializer_map = {init.name: init for init in graph.initializer}
+
+    # For each node, if its input is shared, create a copy
+    for node in graph.node:
+        new_inputs = []
+        for inp in node.input:
+            if inp in initializer_map and usage_count[inp] > 1:
+                # Clone initializer with a new name
+                new_name = inp + "_for_" + node.name
+                new_init = helper.make_tensor(
+                    name=new_name,
+                    data_type=initializer_map[inp].data_type,
+                    dims=initializer_map[inp].dims,
+                    vals=onnx.numpy_helper.to_array(initializer_map[inp])
+                    .flatten()
+                    .tolist(),
+                )
+                graph.initializer.append(new_init)
+                new_inputs.append(new_name)
+
+                # Decrease usage count for the original
+                usage_count[inp] -= 1
+            else:
+                new_inputs.append(inp)
+        node.input[:] = new_inputs
+
+    onnx.save(model, output_path)
+    print(f"Saved de-duplicated ONNX model to {output_path}")
+
+
 model = Conformer()  # variant depends on repo
 model.eval()  # no checkpoint loaded
 
@@ -62,7 +104,12 @@ torch.onnx.export(
     dynamic_axes={"input": {0: "batch_size"}, "output": {0: "batch_size"}},
 )
 
+
 print("Exported conformer_untrained.onnx successfully!")
+
+duplicate_shared_initializers(
+    "./conformer_untrained.onnx", "./conformer_untrained.onnx"
+)
 
 simplify_model("./conformer_untrained.onnx")
 analyze_model("./conformer_untrained_simplified.onnx")

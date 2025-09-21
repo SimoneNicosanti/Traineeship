@@ -115,12 +115,12 @@ def define_layer_to_comp_assignment_constraints(
 
     ## Input and Output Components have only one assigned layer
     for layer_id in model_graph.nodes:
-        if layer_id == 0:
+        if layer_id == "InputGenerator":
             problem += problem.layer_ass_vars[(layer_id, 0)] == 1
         else:
             problem += problem.layer_ass_vars[(layer_id, 0)] == 0
 
-        if layer_id == len(model_graph.nodes) - 1:
+        if layer_id == "OutputReceiver":
             problem += (
                 problem.layer_ass_vars[(layer_id, len(comp_graph.nodes) - 1)] == 1
             )

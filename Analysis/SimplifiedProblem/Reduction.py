@@ -140,11 +140,21 @@ def reduce_with_matching(model_graph: nx.DiGraph, reduction_rounds: int = 3):
                     in_match = True
                     break
             if not in_match:
-                merged_graph.add_node(node, is_match=False, layers=[node])
+                merged_graph.add_node(
+                    node,
+                    is_match=False,
+                    layers=[node],
+                    flops=curr_graph.nodes[node]["flops"],
+                )
 
         for edge_idx, edge in enumerate(list(valid_match)):
             match_name = f"match_{edge_idx}_{i}"
-            merged_graph.add_node(match_name, is_match=True, layers=edge)
+            merged_graph.add_node(
+                match_name,
+                is_match=True,
+                layers=edge,
+                flops=sum([curr_graph.nodes[node]["flops"] for node in edge]),
+            )
 
         ## Creationg connections among nodes and matching nodes
         for first_node in merged_graph.nodes:
@@ -157,19 +167,8 @@ def reduce_with_matching(model_graph: nx.DiGraph, reduction_rounds: int = 3):
                         if (first_node_lay, second_node_lay) in curr_graph.edges:
                             merged_graph.add_edge(first_node, second_node)
 
-        # node_colors = [
-        #     "red" if merged_graph.nodes[n].get("is_match", True) else "lightblue"
-        #     for n in merged_graph.nodes
-        # ]
-        # pos = nx.nx_pydot.graphviz_layout(merged_graph, prog="dot")
-        # nx.draw(merged_graph, pos, node_color=node_colors, node_size=100)
-        # plt.show()
-
-        # print("Nodes >> ", len(merged_graph.nodes))
-        # print("Edges >> ", len(merged_graph.edges))
-
         if not nx.is_directed_acyclic_graph(merged_graph):
-            raise Exception("Not acyclic")
+            raise Exception("Coarsed Graph is Not acyclic")
 
         curr_graph = merged_graph
 
